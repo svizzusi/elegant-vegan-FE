@@ -1,0 +1,33 @@
+.customerDashboardLinks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    max-width: var(--maxWidth);
+    margin: auto;
+    padding: var(--padding);
+    gap: 10px;
+}
+
+.customerDashboardLinkContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: fit-content;
+    background: var(--gray);
+    border-radius: var(--borderRadius);
+    padding: var(--padding);
+    gap: 10px;
+}
+
+.customerDashboardLink {
+    text-decoration: none;
+    color: var(--orange);
+    font-size: var(--links);
+}
+
+.customerDashboardLink:hover {
+    color: var(--blue);
+}

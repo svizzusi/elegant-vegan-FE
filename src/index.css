@@ -1,0 +1,67 @@
+:root {
+    --blue: #0fb0c2;
+    --mustard: #ffe066;
+    --orange: #ff7036;
+    --gray: #322e2e;
+    --black: #070707;
+    --white: #f7f1f1;
+    --maxWidth: 1200px;
+    --padding: 1.8rem;
+    --links: 2.2rem;
+    --borderRadius: 40px;
+  }
+  
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  html {
+    font-size: 62.5%;
+    font-family: 'Quicksand', sans-serif;
+  }
+  
+  body {
+    background: var(--white);
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  p {
+    font-size: 2.2rem;
+  }
+
+  span {
+    font-size: 1.4rem;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2 {
+      font-size: 2rem;
+    }
+  
+    p {
+      font-size: 1.4rem;
+    }
+  
+    span {
+      font-size: 1rem;
+    }
+  }

@@ -1,0 +1,59 @@
+.restaurantFormContainer {
+    width: 100%;
+    max-width: var(--maxWidth);
+    height: fit-content;
+    padding: var(--padding);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.restaurantForm {
+    width: 100%;
+    max-width: 600px;
+    height: fit-content;
+    padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    margin: auto;
+    background: var(--gray);
+    border-radius: var(--borderRadius);
+}
+
+.restaurantFormLabel {
+    font-size: 2.2rem;
+    color: var(--blue);
+    padding: var(--padding);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.restaurantFormInput {
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    border-radius: var(--borderRadius);
+    padding: 12px 20px;
+}
+
+.restaurantFormRatingRadio {
+    display: none;
+}
+
+.restaurantFormRatingStar {
+    cursor: pointer;
+}
+
+.restaurantFormTextInput {
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+}

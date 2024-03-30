@@ -1,0 +1,14 @@
+.restaurantSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    gap: 10px;
+    padding: var(--padding);
+}
+
+.restaurantHeading {
+    color: var(--blue);
+    font-size: 44px;
+}
