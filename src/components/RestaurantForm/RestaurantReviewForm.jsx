@@ -1,62 +1,77 @@
 import { RiStarSFill } from "react-icons/ri";
 import {useState} from 'react'
-import style from "./RestaurantForm.module.css"
+import style from "./RestaurantReviewForm.module.css"
 
-const RestaurantForm = () => {
+const RestaurantReviewForm = () => {
     const [flavorRating, setFlavorRating] = useState(null);
     const [flavorHover, setFlavorHover] = useState(null);
     const [textureRating, setTextureRating] = useState(null);
     const [textureHover, setTextureHover] = useState(null);
     const [priceRating, setPriceRating] = useState(null);
     const [priceHover, setPriceHover] = useState(null);
+    
+    const [formData, setFormData] = useState({
+        customerName: '',
+        customerEmail: '',
+        customerFlavorRating: flavorRating,
+        customerTextureRating: textureRating,
+        customerPriceRating: priceRating,
+        customerReviewMessage: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData,
+                [e.target.name]: e.target.value,
+            }
+        });
+        
+    }
 
   return (
-    <div className={style.restaurantFormContainer}>
-        <form className={style.restaurantForm}>
-            <label className={style.restaurantFormLabel}>
+    <div className={style.restaurantReviewFormContainer}>
+        <form className={style.restaurantReviewForm}>
+            <label className={style.restaurantReviewFormLabel}>
                 Name:
-                <input className={style.restaurantFormInput} type="text" name='name' placeholder='Name' required />
+                <input 
+                    className={style.restaurantReviewFormInput} 
+                    type="text" 
+                    name='name' 
+                    placeholder='Name'
+                    value={formData.customerName} 
+                    onChange={handleChange} 
+                    required
+                />
             </label>
-            <label className={style.restaurantFormLabel}>
+            <label className={style.restaurantReviewFormLabel}>
                 Email:
-                <input className={style.restaurantFormInput} type="email" name='email' placeholder='Email' required />
+                <input 
+                    className={style.restaurantReviewFormInput} 
+                    type="email" 
+                    name='email' 
+                    placeholder='Email'
+                    value={formData.customerEmail}
+                    onChange={handleChange}
+                    required 
+                />
             </label>
-            {/* <label>
-            Restaurant:
-            <select name="Restaurant Name">
-                <option default value="soboFood">Select Restaurant</option>
-                <option value="soboFood">Sobo Food</option>
-                <option value="houseParty">House Party</option>
-                <option value="karanaFoods">KARANA Foods</option>
-                <option value="blackSheepFoods">Black Sheep Foods</option>
-                <option value="primeRoots">Prime Roots</option>
-                <option value="naturesFynd">Nature's Fynd</option>
-                <option value="eclipseFoods">Eclipse Foods</option>
-                <option value="mellody">Mellody</option>
-                <option value="misfitsHealth">Misfits Health</option>
-                <option value="struesli">Struesli</option>
-                <option value="wildseed">Wildseed</option>
-                <option value="radRadish">Rad Radish</option>
-                <option value="omSabor">OM Sabor</option>
-                <option value="skyCafe">Sky Cafe</option>
-            </select>
-            </label> */}
             <div>
-                <label className={style.restaurantFormLabel}>
+                <label className={style.restaurantReviewFormLabel}>
                     Flavor:
                     {[...Array(5)].map((star, index) => {
                         const currentRating = index + 1;
                         return (
                             <label key={index}>
                                 <input
-                                className={style.restaurantFormRatingRadio}
+                                className={style.restaurantReviewFormRatingRadio}
                                     type="radio" 
                                     name="rating"
                                     value={currentRating}
                                     onClick={() => setFlavorRating(currentRating)}
                                 />
                                 <RiStarSFill 
-                                    className={style.restaurantFormRatingStar}
+                                    className={style.restaurantReviewFormRatingStar}
                                     size={50}
                                     color={currentRating <= (flavorHover || flavorRating) ? '#ffe066' : '#e4e5e9'}
                                     onMouseEnter={() => setFlavorHover(currentRating)}
@@ -68,21 +83,21 @@ const RestaurantForm = () => {
                 </label>
             </div>
             <div>
-                <label className={style.restaurantFormLabel}>
+                <label className={style.restaurantReviewFormLabel}>
                     Texture:
                     {[...Array(5)].map((star, index) => {
                         const currentRating = index + 1;
                         return (
                             <label key={index}>
                                 <input
-                                className={style.restaurantFormRatingRadio}
+                                className={style.restaurantReviewFormRatingRadio}
                                     type="radio" 
                                     name="rating"
                                     value={currentRating}
                                     onClick={() => setTextureRating(currentRating)}
                                 />
                                 <RiStarSFill 
-                                    className={style.restaurantFormRatingStar}
+                                    className={style.restaurantReviewFormRatingStar}
                                     size={50}
                                     color={currentRating <= (textureHover || textureRating) ? '#0fb0c2' : '#e4e5e9'}
                                     onMouseEnter={() => setTextureHover(currentRating)}
@@ -94,21 +109,21 @@ const RestaurantForm = () => {
                 </label>
             </div>
             <div>
-                <label className={style.restaurantFormLabel}>
+                <label className={style.restaurantReviewFormLabel}>
                     Price:
                     {[...Array(5)].map((star, index) => {
                         const currentRating = index + 1;
                         return (
                             <label key={index}>
                                 <input
-                                className={style.restaurantFormRatingRadio}
+                                className={style.restaurantReviewFormRatingRadio}
                                     type="radio" 
                                     name="rating"
                                     value={currentRating}
                                     onClick={() => setPriceRating(currentRating)}
                                 />
                                 <RiStarSFill 
-                                    className={style.restaurantFormRatingStar}
+                                    className={style.restaurantReviewFormRatingStar}
                                     size={50}
                                     color={currentRating <= (priceHover || priceRating) ? '#ff7036' : '#e4e5e9'}
                                     onMouseEnter={() => setPriceHover(currentRating)}
@@ -119,18 +134,34 @@ const RestaurantForm = () => {
                     })}
                 </label>
             </div>
-            <label className={style.restaurantFormLabel}>
+            <label className={style.restaurantReviewFormLabel}>
                 Comments:
                 <textarea 
-                    className={style.restaurantFormTextInput}
+                    className={style.restaurantReviewFormTextInput}
                     name="postContent"
                     defaultValue="What did you think?" 
                     rows={4} 
-                    cols={40} />
+                    cols={40}
+                    value={formData.customerReviewMessage}
+                    onChange={handleChange} 
+                />
             </label>
+                <input
+                    className={style.addProductSubmit}
+                    disabled={
+                        formData.customerName === '' ||
+                        formData.customerEmail === '' ||
+                        formData.customerReviewMessage === ''||
+                        formData.customerFlavorRating === ''||
+                        formData.customerTextureRating === ''||
+                        formData.customerPriceRating === ''
+                    }
+                    type='submit'
+                    value='Add Product'
+                />
         </form> 
     </div>
   )
 };
 
-export default RestaurantForm;
+export default RestaurantReviewForm;
