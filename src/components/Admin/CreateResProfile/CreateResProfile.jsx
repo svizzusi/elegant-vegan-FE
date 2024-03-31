@@ -47,7 +47,6 @@ const CreateResProfile = () => {
                     postalCode,
                     country
                 })
-                // console.log(formData)
                 console.log(res)
             } catch (err) {
                 console.log(err)
