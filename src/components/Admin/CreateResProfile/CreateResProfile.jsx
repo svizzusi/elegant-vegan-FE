@@ -37,7 +37,7 @@ const CreateResProfile = () => {
         const country = formData.resCountry
 
             try {
-                const res = await axios.post('https://localhost:5173', {
+                const res = await axios.post('http://localhost:5173', {
                     name,
                     email,
                     phone,

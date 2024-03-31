@@ -1,4 +1,4 @@
-import { FaStar } from "react-icons/fa";
+import {FaStar} from "react-icons/fa";
 import {useState} from 'react'
 import style from "./RestaurantReviewForm.module.css"
 import axios from 'axios'
@@ -40,7 +40,7 @@ const RestaurantReviewForm = () => {
         const message = formData.customerReviewMessage
 
             try {
-                const res = await axios.post('https://localhost:5173', {
+                const res = await axios.post('http://localhost:5173', {
                     name,
                     email,
                     flavor,
