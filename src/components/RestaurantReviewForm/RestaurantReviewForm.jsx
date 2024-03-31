@@ -48,7 +48,6 @@ const RestaurantReviewForm = () => {
                     price,
                     message
                 })
-                // console.log(formData)
                 console.log(res)
             } catch (err) {
                 console.log(err)
