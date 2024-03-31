@@ -1,4 +1,4 @@
-import RestaurantReviewForm from "../../components/RestaurantReviewForm/RestaurantReviewForm";
+import RestaurantReviewForm from '../../components/RestaurantReviewForm/RestaurantReviewForm';
 import style from './SoboFood.module.css'
 
 const Sobo = () => {

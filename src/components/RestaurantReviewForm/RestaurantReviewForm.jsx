@@ -1,6 +1,7 @@
-import { RiStarSFill } from "react-icons/ri";
+import { FaStar } from "react-icons/fa";
 import {useState} from 'react'
 import style from "./RestaurantReviewForm.module.css"
+import axios from 'axios'
 
 const RestaurantReviewForm = () => {
     const [flavorRating, setFlavorRating] = useState(null);
@@ -25,19 +26,47 @@ const RestaurantReviewForm = () => {
                 ...prevFormData,
                 [e.target.name]: e.target.value,
             }
-        });
-        
+        });   
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const name = formData.customerName
+        const email = formData.customerEmail
+        const flavor = formData.customerFlavorRating 
+        const texture = formData.customerTextureRating 
+        const price = formData.customerPriceRating
+        const message = formData.customerReviewMessage
+
+            try {
+                const res = await axios.post('https://localhost:5173', {
+                    name,
+                    email,
+                    flavor,
+                    texture,
+                    price,
+                    message
+                })
+                // console.log(formData)
+                console.log(res)
+            } catch (err) {
+                console.log(err)
+            }
     }
 
   return (
-    <div className={style.restaurantReviewFormContainer}>
-        <form className={style.restaurantReviewForm}>
+    <section className={style.restaurantReviewFormContainer}>
+        <form 
+            className={style.restaurantReviewForm}
+            onSubmit={handleSubmit}
+        >
             <label className={style.restaurantReviewFormLabel}>
                 Name:
                 <input 
                     className={style.restaurantReviewFormInput} 
                     type="text" 
-                    name='name' 
+                    name='customerName' 
                     placeholder='Name'
                     value={formData.customerName} 
                     onChange={handleChange} 
@@ -49,7 +78,7 @@ const RestaurantReviewForm = () => {
                 <input 
                     className={style.restaurantReviewFormInput} 
                     type="email" 
-                    name='email' 
+                    name='customerEmail' 
                     placeholder='Email'
                     value={formData.customerEmail}
                     onChange={handleChange}
@@ -66,11 +95,11 @@ const RestaurantReviewForm = () => {
                                 <input
                                 className={style.restaurantReviewFormRatingRadio}
                                     type="radio" 
-                                    name="rating"
+                                    name="flavorRating"
                                     value={currentRating}
                                     onClick={() => setFlavorRating(currentRating)}
                                 />
-                                <RiStarSFill 
+                                <FaStar
                                     className={style.restaurantReviewFormRatingStar}
                                     size={50}
                                     color={currentRating <= (flavorHover || flavorRating) ? '#ffe066' : '#e4e5e9'}
@@ -92,11 +121,11 @@ const RestaurantReviewForm = () => {
                                 <input
                                 className={style.restaurantReviewFormRatingRadio}
                                     type="radio" 
-                                    name="rating"
+                                    name="textureRating"
                                     value={currentRating}
                                     onClick={() => setTextureRating(currentRating)}
                                 />
-                                <RiStarSFill 
+                                <FaStar 
                                     className={style.restaurantReviewFormRatingStar}
                                     size={50}
                                     color={currentRating <= (textureHover || textureRating) ? '#0fb0c2' : '#e4e5e9'}
@@ -118,11 +147,11 @@ const RestaurantReviewForm = () => {
                                 <input
                                 className={style.restaurantReviewFormRatingRadio}
                                     type="radio" 
-                                    name="rating"
+                                    name="priceRating"
                                     value={currentRating}
                                     onClick={() => setPriceRating(currentRating)}
                                 />
-                                <RiStarSFill 
+                                <FaStar
                                     className={style.restaurantReviewFormRatingStar}
                                     size={50}
                                     color={currentRating <= (priceHover || priceRating) ? '#ff7036' : '#e4e5e9'}
@@ -138,16 +167,17 @@ const RestaurantReviewForm = () => {
                 Comments:
                 <textarea 
                     className={style.restaurantReviewFormTextInput}
-                    name="postContent"
-                    defaultValue="What did you think?" 
+                    name="customerReviewMessage"
                     rows={4} 
                     cols={40}
                     value={formData.customerReviewMessage}
                     onChange={handleChange} 
                 />
             </label>
+            <div className={style.restaurantReviewFormSummitContainer}>
                 <input
-                    className={style.addProductSubmit}
+                    className={style.restaurantReviewFormSubmit}
+                    type='submit'
                     disabled={
                         formData.customerName === '' ||
                         formData.customerEmail === '' ||
@@ -156,11 +186,10 @@ const RestaurantReviewForm = () => {
                         formData.customerTextureRating === ''||
                         formData.customerPriceRating === ''
                     }
-                    type='submit'
-                    value='Add Product'
                 />
+            </div>
         </form> 
-    </div>
+    </section>
   )
 };
 

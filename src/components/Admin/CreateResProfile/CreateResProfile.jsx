@@ -1,33 +1,72 @@
 import style from './CreateResProfile.module.css'
 import {useState} from 'react'
+import axios from 'axios'
 
 const CreateResProfile = () => {
 
-    const [address, setAddress] = useState({
-        street: '',
-        city: '',
-        state: '',
-        postalCode: '',
-        country: ''
+    const [formData, setFormData] = useState({
+        resName: '',
+        resEmail: '',
+        resPhone: '',
+        resStreet: '',
+        resCity: '',
+        resState: '',
+        resPostalCode: '',
+        resCountry: ''
       });
     
       const handleChange = (e) => {
-        const { name, value } = e.target;
-        setAddress(prevAddress => ({
-          ...prevAddress,
-          [name]: value
-        }));
+        setFormData(prevFormData => {
+            return{ 
+                ...prevFormData,
+                [e.target.name]: e.target.value
+            }
+        });
       };
 
+      const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const name = formData.resName
+        const email = formData.resEmail
+        const phone = formData.resPhone 
+        const street = formData.resStreet 
+        const city= formData.resCity
+        const state = formData.resState
+        const postalCode = formData.resPostalCode
+        const country = formData.resCountry
+
+            try {
+                const res = await axios.post('https://localhost:5173', {
+                    name,
+                    email,
+                    phone,
+                    street,
+                    city,
+                    state,
+                    postalCode,
+                    country
+                })
+                // console.log(formData)
+                console.log(res)
+            } catch (err) {
+                console.log(err)
+            }
+    }
+
   return (
-    <section>
-        <form>
-            <label>
+    <section className={style.createResProfileFormContainer}>
+        <form
+            onSubmit={handleSubmit}
+            className={style.createResProfileForm}>
+            <label className={style.createResProfileFormLabel}>
                 Name:
                 <input 
                     type="text" 
-                    name="name" 
+                    name="resName" 
                     placeholder="Restaurant Name"
+                    required
+                    value={formData.resName}
                     onChange={handleChange}
                 />
             </label>
@@ -36,9 +75,10 @@ const CreateResProfile = () => {
                 <input 
                     className={style.createResProfileFormInput} 
                     type="email" 
-                    name='email' 
+                    name='resEmail' 
                     placeholder='Email' 
                     required
+                    value={formData.resEmail}
                     onChange={handleChange}
                     />
             </label>
@@ -47,53 +87,63 @@ const CreateResProfile = () => {
                 <input 
                     className={style.createResProfileFormInput} 
                     type="tel" 
-                    name='phone' 
+                    name='resPhone' 
                     placeholder='Phone' 
                     required 
+                    value={formData.resPhone}
                     onChange={handleChange}
                 />
             </label>
-            <label>
+            <label className={style.createResProfileFormLabel}>
                 Street:
                 <input
+                    className={style.createResProfileFormInput}
                     type="text"
-                    name="street"
-                    value={address.street}
+                    name="resStreet"
+                    required
+                    value={formData.resStreet}
                     onChange={handleChange}
                 />
             </label>
-            <label>
+            <label className={style.createResProfileFormLabel}>
                 City:
                 <input
+                    className={style.createResProfileFormInput}
                     type="text"
-                    name="city"
-                    value={address.city}
+                    name="resCity"
+                    required
+                    value={formData.resCity}
                     onChange={handleChange}
                 />
             </label>
-            <label>
+            <label className={style.createResProfileFormLabel}>
                 State:
                 <input
+                    className={style.createResProfileFormInput}
                     type="text"
-                    name="state"
-                    value={address.state}
+                    name="resState"
+                    required
+                    value={formData.resState}
                     onChange={handleChange}
                 />
             </label>
-            <label>
+            <label className={style.createResProfileFormLabel}>
                 Postal Code:
                 <input
+                    className={style.createResProfileFormInput}
                     type="text"
-                    name="postalCode"
-                    value={address.postalCode}
+                    name="resPostalCode"
+                    required
+                    value={formData.resPostalCode}
                     onChange={handleChange}
                 />
             </label>
-            <label>
+            <label className={style.createResProfileFormLabel}>
                 Country:
                 <select
-                    name="country"
-                    value={address.country}
+                    name="resCountry"
+                    required
+                    value={formData.resCountry}
                     onChange={handleChange}
                 >
                     <option value="USA">United States</option>
@@ -101,6 +151,21 @@ const CreateResProfile = () => {
                     <option value="UK">United Kingdom</option>
                 </select>
             </label>
+            <div className={style.restaurantReviewFormSummitContainer}>
+                <input
+                    className={style.restaurantReviewFormSubmit}
+                    type='submit'
+                    disabled={
+                        formData.resName === '' ||
+                        formData.resEmail === '' ||
+                        formData.resPhone === ''||
+                        formData.resStreet === ''||
+                        formData.resCity === ''||
+                        formData.resPostalCode === '' ||
+                        formData.resCountry === ''
+                    }
+                />
+            </div>
         </form>
     </section>
   )
